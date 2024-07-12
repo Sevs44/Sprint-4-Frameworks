@@ -32,23 +32,24 @@ class UserListFragment : Fragment() {
             goToAddUser()
         }
 
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
         binding.rvUserList.layoutManager = LinearLayoutManager(context)
 
         lifecycleScope.launch {
             val users = viewModel.getUsers()
-            if (users.isEmpty()) binding.tvNoUsersFound.visibility = View.VISIBLE
-            else {
-                binding.tvNoUsersFound.visibility = View.GONE
-                setUpAdapter(users)
-            }
-
+            showUsers(users)
         }
 
+        return binding.root
+    }
+
+
+    private fun showUsers(users: List<UserEntity>?) {
+        if (users.isNullOrEmpty()) {
+            binding.tvNoUsersFound.visibility = View.VISIBLE
+        } else {
+            binding.tvNoUsersFound.visibility = View.GONE
+            setUpAdapter(users)
+        }
     }
 
     private fun setUpAdapter(users: List<UserEntity>) {

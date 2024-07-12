@@ -8,11 +8,11 @@ import javax.inject.Inject
 @ActivityRetainedScoped
 class UserRepository @Inject constructor(private val userDao: UserDAO) {
 
-    suspend fun getAllUsersFromDatabase(): List<UserEntity> {
+    suspend fun getAllUsersFromDatabase(): List<UserEntity>? {
         return userDao.getAllUsers()
     }
 
-    suspend fun insertUsers(user: UserEntity) {
+    suspend fun insertUser(user: UserEntity) {
         userDao.insertUser(user)
     }
 
