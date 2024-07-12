@@ -1,24 +1,26 @@
 [versions]
 agp = "8.5.0"
 googlePlayServicesMaps = "19.0.0"
-hiltAndroid = "2.48.1"
-kotlin = "1.9.0"
-coreKtx = "1.10.1"
+hiltAndroid = "2.51.1"
+kotlin = "2.0.0"
+coreKtx = "1.13.1"
 junit = "4.13.2"
-junitVersion = "1.1.5"
-espressoCore = "3.5.1"
-appcompat = "1.6.1"
-material = "1.10.0"
-activity = "1.8.0"
+junitVersion = "1.2.1"
+espressoCore = "3.6.1"
+appcompat = "1.7.0"
+material = "1.12.0"
+activity = "1.9.0"
 constraintlayout = "2.1.4"
 navigationFragmentKtx = "2.7.7"
-lifecycle = "2.7.0"
+lifecycle = "2.8.3"
 roomCommon = "2.6.1"
 roomKtx = "2.6.1"
 navigationUiKtx = "2.7.7"
 secretsGradlePlugin = "2.0.1"
-daggerHilt = "2.44"
+daggerHilt = "2.51.1"
 pluginKspTools = "2.0.0-1.0.21"
+legacySupportV4 = "1.0.0"
+fragmentKtx = "1.8.1"
 
 [libraries]
 androidxLivecycleLivedata = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "lifecycle" }
@@ -39,6 +41,8 @@ androidx-activity = { group = "androidx.activity", name = "activity", version.re
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 androidx-room-common = { group = "androidx.room", name = "room-common", version.ref = "roomCommon" }
 androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "roomKtx" }
+androidx-legacy-support-v4 = { group = "androidx.legacy", name = "legacy-support-v4", version.ref = "legacySupportV4" }
+androidx-fragment-ktx = { group = "androidx.fragment", name = "fragment-ktx", version.ref = "fragmentKtx" }
 
 [bundles]
 lifecycle = ["androidxLivecycleLivedata", "androidxLivecycleRuntime", "androidxLivecycleViewmodel"]

@@ -1,0 +1,25 @@
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation_graph"
+    app:startDestination="@id/fragment_user_list">
+
+    <fragment
+        android:id="@+id/fragment_user_list"
+        android:name="com.example.sprint4frameworks.ui.userlist.UserListFragment"
+        android:label="UserList"
+        tools:layout="@layout/fragment_user_list">
+        <action
+            android:id="@+id/action_fragment_user_list_to_fragment_add_user"
+            app:destination="@id/fragment_add_user"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_add_user"
+        android:name="com.example.sprint4frameworks.ui.adduser.AddUserFragment"
+        android:label="AddUser"
+        tools:layout="@layout/fragment_add_user"></fragment>
+
+</navigation>

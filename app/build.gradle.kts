@@ -4,7 +4,7 @@ plugins {
     alias(libs.plugins.navigationSafeArgs)
     alias(libs.plugins.pluginSecretGradle)
     alias(libs.plugins.daggerHilt)
-    kotlin("kapt")
+    alias(libs.plugins.pluginDevKsp)
 
 }
 
@@ -63,7 +63,9 @@ android {
 dependencies {
     //Hilt
     implementation(libs.hilt.android)
-    kapt(libs.hilt.android.compiler)
+    implementation(libs.androidx.legacy.support.v4)
+    implementation(libs.androidx.fragment.ktx)
+    ksp(libs.hilt.android.compiler)
 
     //Room
     implementation(libs.androidx.room.common)
@@ -87,8 +89,4 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-}
-// Allow references to generated code
-kapt {
-    correctErrorTypes = true
 }
