@@ -10,7 +10,7 @@ import com.example.sprint4frameworks.data.db.entities.UserEntity
 @Dao
 interface UserDAO {
     @Query("SELECT * FROM users ORDER BY name DESC")
-    fun getAllUsers(): List<UserEntity>
+    suspend fun getAllUsers(): List<UserEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertUser(user: UserEntity)

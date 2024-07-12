@@ -70,6 +70,10 @@ dependencies {
     //Room
     implementation(libs.androidx.room.common)
     implementation(libs.androidx.room.ktx)
+    implementation(libs.androidx.room.runtime)
+    ksp(libs.androidx.room.compiler)
+
+
 
     //Navigation
     implementation(libs.androidx.navigation.fragment.ktx)
