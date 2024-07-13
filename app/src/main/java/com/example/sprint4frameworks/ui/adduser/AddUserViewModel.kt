@@ -54,14 +54,14 @@ class AddUserViewModel @Inject constructor(private val userRepository: UserRepos
         actualLocationLat: Double,
         actualLocationLng: Double
     ): Boolean {
-        return (name == null ||
-                favColor == null ||
-                birthdate == null ||
-                favCityLat == null ||
-                favCityLng == null ||
-                favCityName == null ||
-                favNumber == null ||
-                actualLocationLat == null ||
-                actualLocationLng == null)
+        return !(name.isEmpty() ||
+                favColor.isEmpty() ||
+                birthdate.isEmpty() ||
+                favCityLat.toString().isEmpty() ||
+                favCityLng.toString().isEmpty() ||
+                favCityName.isEmpty() ||
+                favNumber.isEmpty() ||
+                actualLocationLat.toString().isEmpty() ||
+                actualLocationLng.toString().isEmpty())
     }
 }

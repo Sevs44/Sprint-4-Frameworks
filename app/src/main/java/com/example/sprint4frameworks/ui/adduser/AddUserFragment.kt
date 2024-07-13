@@ -22,6 +22,8 @@ class AddUserFragment : Fragment() {
     private lateinit var binding: FragmentAddUserBinding
     private val viewModel: AddUserViewModel by viewModels()
 
+    private var selectedCity: City? = null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -48,10 +50,8 @@ class AddUserFragment : Fragment() {
         val favColor = binding.etFavColor.text.toString()
         val birthdate = binding.etBirthdate.text.toString()
         val favCityName = binding.spinnerFavCity.selectedItem.toString()
-        val favCityLat =
-            getCity(cities, binding.spinnerFavCity.onItemSelectedListener.toString()).lat
-        val favCityLng =
-            getCity(cities, binding.spinnerFavCity.onItemSelectedListener.toString()).lng
+        val favCityLat = getCity(cities).lat
+        val favCityLng = getCity(cities).lng
         val favNumber = binding.etFavNumber.text.toString()
         val actualLocationLat = getLocation().latitude
         val actualLocationLng = getLocation().longitude
@@ -84,10 +84,8 @@ class AddUserFragment : Fragment() {
             Toast.makeText(context, "Fill all fields", Toast.LENGTH_LONG).show()
     }
 
-    private fun getCity(cities: List<City>, cityName: String): City {
-        val city: City
-        val unknownCity = cities.find { it.name == cityName }
-        city = unknownCity?.copy() ?: cities[0]
+    private fun getCity(cities: List<City>): City {
+        val city: City = selectedCity?.copy() ?: cities[0]
         return city
     }
 
@@ -110,15 +108,16 @@ class AddUserFragment : Fragment() {
             object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(
                     parent: AdapterView<*>,
-                    view: View,
+                    view: View?,
                     position: Int,
                     id: Long
                 ) {
-                    cities[position]
+                    selectedCity = cities[position]
+
                 }
 
-                override fun onNothingSelected(parent: AdapterView<*>) {
-                    cities[0]
+                override fun onNothingSelected(p0: AdapterView<*>?) {
+                    selectedCity = null
                 }
             }
     }
