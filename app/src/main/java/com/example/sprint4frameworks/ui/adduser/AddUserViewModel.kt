@@ -10,11 +10,11 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class AddUserViewModel @Inject constructor(
-    private val userRepository: UserRepository,
-) :
+class AddUserViewModel @Inject constructor(private val userRepository: UserRepository) :
     ViewModel() {
+
     fun getCities() = CitiesRepository().getCities()
+
     fun addUser(
         name: String,
         favColor: String,
