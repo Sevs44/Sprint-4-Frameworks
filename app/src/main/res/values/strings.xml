@@ -15,10 +15,6 @@
     <string name="open_map">Abrir mapa</string>
     <string name="user_actual_position_example">40.730610, -73.935242</string>
     <string name="back_button_description">Back button</string>
-    <string name="choose_location">Selecciona localización</string>
     <string name="description_add_user_button">Boton de añadir usuarios</string>
     <string name="users_not_found">No hay usuarios</string>
-    <string name="change_location">Cambiar localización</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
