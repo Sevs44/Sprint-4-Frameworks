@@ -37,6 +37,28 @@
         <argument
             android:name="id"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_fragment_user_details_to_fragment_marked_map"
+            app:destination="@id/fragment_marked_map"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_marked_map"
+        android:name="com.example.sprint4frameworks.ui.usermarkedmap.UserMarkedMapFragment"
+        android:label="MarkedMap"
+        tools:layout="@layout/fragment_marked_map">
+        <argument
+            android:name="latitude"
+            app:argType="string" />
+        <argument
+            android:name="longitude"
+            app:argType="string" />
+        <argument
+            android:name="cityName"
+            app:argType="string" />
+
     </fragment>
 
 </navigation>

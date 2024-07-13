@@ -20,6 +20,7 @@ daggerHilt = "2.51.1"
 pluginKspTools = "2.0.0-1.0.21"
 legacySupportV4 = "1.0.0"
 fragmentKtx = "1.8.1"
+googlePlayServicesLocation = "21.3.0"
 
 [libraries]
 androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomCommon" }
@@ -31,6 +32,7 @@ androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = 
 androidx-navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigationFragmentKtx" }
 androidx-navigation-ui-ktx = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navigationFragmentKtx" }
 google-play-services-maps = { module = "com.google.android.gms:play-services-maps", version.ref = "googlePlayServicesMaps" }
+google-play-services-location = { module = "com.google.android.gms:play-services-location", version.ref = "googlePlayServicesLocation" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroid" }
 hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hiltAndroid" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }

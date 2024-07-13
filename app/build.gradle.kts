@@ -84,6 +84,7 @@ dependencies {
 
     // Maps SDK for Android
     implementation(libs.google.play.services.maps)
+    implementation(libs.google.play.services.location)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

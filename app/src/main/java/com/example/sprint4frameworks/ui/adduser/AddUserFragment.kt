@@ -13,6 +13,8 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.sprint4frameworks.data.models.City
 import com.example.sprint4frameworks.databinding.FragmentAddUserBinding
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.model.LatLng
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -22,7 +24,9 @@ class AddUserFragment : Fragment() {
     private lateinit var binding: FragmentAddUserBinding
     private val viewModel: AddUserViewModel by viewModels()
 
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
     private var selectedCity: City? = null
+    private var userLocation: LatLng = getLocation()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,7 +34,7 @@ class AddUserFragment : Fragment() {
     ): View {
         val cities = viewModel.getCities()
 
-        getLocation()
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
 
         binding = FragmentAddUserBinding.inflate(inflater, container, false)
 
@@ -90,7 +94,6 @@ class AddUserFragment : Fragment() {
     }
 
     private fun getLocation(): LatLng {
-        //TODO
         return LatLng(40.7128, -74.0060)
     }
 

@@ -30,21 +30,29 @@ class UserDetailsFragment : Fragment() {
 
         lifecycleScope.launch {
             val user = viewModel.getUser(args.id)
-            displayUserInfo(user)
+            setUpAll(user)
         }
 
         binding.ibBack.setOnClickListener {
             findNavController().navigateUp()
         }
 
-        binding.btOpenMap.setOnClickListener {
-            //TODO
-        }
 
         return binding.root
     }
 
-    private fun displayUserInfo(user: UserEntity?) {
+    private fun setUpOpenMapButton(user: UserEntity) {
+        binding.btOpenMap.setOnClickListener {
+            val action = UserDetailsFragmentDirections.actionFragmentUserDetailsToFragmentMarkedMap(
+                user.favoriteCityCoordinatesLat.toString(),
+                user.favoriteCityCoordinatesLat.toString(),
+                user.favoriteCityName
+            )
+            findNavController().navigate(action)
+        }
+    }
+
+    private fun setUpAll(user: UserEntity?) {
 
         if (user != null) {
             val favCityCoordinates =
@@ -58,6 +66,8 @@ class UserDetailsFragment : Fragment() {
             binding.tvUserFavCityName.text = user.favoriteCityName
             binding.tvUserFavNumber.text = user.favoriteNumber.toString()
             binding.tvActualLocationValue.text = actualLocationCoordinates
+
+            setUpOpenMapButton(user)
 
         } else
             Toast.makeText(context, "ERROR: User not found or null", Toast.LENGTH_LONG).show()
