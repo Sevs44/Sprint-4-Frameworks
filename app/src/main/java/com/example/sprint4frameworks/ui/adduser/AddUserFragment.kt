@@ -102,7 +102,7 @@ class AddUserFragment : Fragment() {
 
             findNavController().navigateUp()
         } else
-            Toast.makeText(context, "Fill all fields", Toast.LENGTH_LONG).show()
+            Toast.makeText(context, "Fill all fields", Toast.LENGTH_SHORT).show()
     }
 
     private fun getCity(cities: List<City>): City {
