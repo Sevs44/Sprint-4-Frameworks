@@ -44,9 +44,9 @@ class UserDetailsFragment : Fragment() {
     private fun setUpOpenMapButton(user: UserEntity) {
         binding.btOpenMap.setOnClickListener {
             val action = UserDetailsFragmentDirections.actionFragmentUserDetailsToFragmentMarkedMap(
-                user.favoriteCityCoordinatesLat.toString(),
-                user.favoriteCityCoordinatesLat.toString(),
-                user.favoriteCityName
+                latitude = user.favoriteCityCoordinatesLat.toString(),
+                longitude = user.favoriteCityCoordinatesLng.toString(),
+                cityName = user.favoriteCityName
             )
             findNavController().navigate(action)
         }

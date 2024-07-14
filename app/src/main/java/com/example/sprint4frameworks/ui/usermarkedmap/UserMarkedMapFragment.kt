@@ -53,7 +53,7 @@ class UserMarkedMapFragment : Fragment(), OnMapReadyCallback {
         myGoogleMap = map
 
         val userLocation = LatLng(args.latitude.toDouble(), args.longitude.toDouble())
-        myGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 10f))
         myGoogleMap.addMarker(MarkerOptions().position(userLocation).title(args.cityName))
+        myGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 10f))
     }
 }

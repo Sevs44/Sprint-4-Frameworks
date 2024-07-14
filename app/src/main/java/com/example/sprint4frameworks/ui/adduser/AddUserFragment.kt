@@ -1,13 +1,20 @@
 package com.example.sprint4frameworks.ui.adduser
 
+import android.Manifest
 import android.R
+import android.annotation.SuppressLint
+import android.content.pm.PackageManager
+import android.location.Location
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -16,6 +23,7 @@ import com.example.sprint4frameworks.databinding.FragmentAddUserBinding
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.tasks.Task
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -25,8 +33,10 @@ class AddUserFragment : Fragment() {
     private val viewModel: AddUserViewModel by viewModels()
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private var locationResult: Task<Location>? = null
     private var selectedCity: City? = null
-    private var userLocation: LatLng = getLocation()
+    private var userLocation: LatLng = LatLng(0.0, -0.0)
+    private var locationPermissionGranted = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,10 +51,17 @@ class AddUserFragment : Fragment() {
         binding.ibBack.setOnClickListener {
             findNavController().navigateUp()
         }
+
+        binding.btGetLocation.setOnClickListener {
+            getLocationPermission()
+            getRealUserLocation()
+        }
+
+        setUpSpinner(cities)
+
         binding.btSaveUser.setOnClickListener {
             addUser(cities)
         }
-        setUpSpinner(cities)
 
         return binding.root
     }
@@ -57,8 +74,8 @@ class AddUserFragment : Fragment() {
         val favCityLat = getCity(cities).lat
         val favCityLng = getCity(cities).lng
         val favNumber = binding.etFavNumber.text.toString()
-        val actualLocationLat = getLocation().latitude
-        val actualLocationLng = getLocation().longitude
+        val actualLocationLat = userLocation.latitude
+        val actualLocationLng = userLocation.longitude
         if (viewModel.checkFields(
                 name,
                 favColor,
@@ -93,10 +110,6 @@ class AddUserFragment : Fragment() {
         return city
     }
 
-    private fun getLocation(): LatLng {
-        return LatLng(40.7128, -74.0060)
-    }
-
 
     private fun setUpSpinner(cities: List<City>) {
         val adapter = ArrayAdapter(
@@ -124,5 +137,65 @@ class AddUserFragment : Fragment() {
                 }
             }
     }
+
+    private fun getLocationPermission() {
+
+        if (ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION
+            )
+            == PackageManager.PERMISSION_GRANTED
+        ) {
+            locationPermissionGranted = true
+        } else {
+            ActivityCompat.requestPermissions(
+                requireActivity(),
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION
+            )
+        }
+    }
+
+    companion object {
+        const val PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1001
+    }
+
+    @SuppressLint("MissingPermission")
+    private fun getRealUserLocation() {
+        try {
+            if (locationPermissionGranted) {
+                locationResult = fusedLocationClient.lastLocation
+                locationResult!!.addOnCompleteListener(requireActivity()) { task ->
+                    if (task.isSuccessful) {
+                        val lastKnownLocation = task.result
+                        if (lastKnownLocation != null) {
+                            userLocation = LatLng(
+                                lastKnownLocation.latitude,
+                                lastKnownLocation.longitude
+                            )
+                        } else
+                            Toast.makeText(
+                                requireContext(),
+                                "Couldn't access location",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                    } else {
+                        userLocation = LatLng(0.0, -0.0)
+                        Toast.makeText(
+                            requireContext(),
+                            "Couldn't access location",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+            }
+        } catch (e: SecurityException) {
+            Log.e("Exception: %s", e.message, e)
+        }
+
+        binding.tvActualLocationValue.text = "${userLocation.latitude}, ${userLocation.longitude}"
+    }
+
+
 
 }

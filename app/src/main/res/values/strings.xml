@@ -13,8 +13,9 @@
     <string name="user_fav_city_name_example">Nueva York</string>
     <string name="user_favorite_number_example">84</string>
     <string name="open_map">Abrir mapa</string>
-    <string name="user_actual_position_example">40.730610, -73.935242</string>
+    <string name="user_actual_position_example">0.0, -0.0</string>
     <string name="back_button_description">Back button</string>
     <string name="description_add_user_button">Boton de añadir usuarios</string>
     <string name="users_not_found">No hay usuarios</string>
+    <string name="get_location">Obtener localización</string>
 </resources>
